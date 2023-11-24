@@ -231,125 +231,54 @@ let arr = [
   },
 ];
 
-// let userData = document.querySelector(".userData")
-
-// let input = document.querySelector(".inp")
-//   let table = document.createElement("tr")
-
-//   console.log(userData)
-
-// function render(data){
-
-//   table.innerHTML = null
-
-//   data.forEach(function (item) {
-
-//     let tr = document.createElement("tr");
-//     let id = document.createElement("td");
-//     let name = document.createElement("td");
-//     let email = document.createElement("td");
-//     let username = document.createElement("td");
-//     let address = document.createElement("td");
-//     let phone = document.createElement("td");
-//     let website = document.createElement("td");
-//     let company = document.createElement("td");
-
-//     id.textContent = item.id;
-//     username.textContent = item.name;
-//     name.textContent = item.username;
-//     email.textContent = item.email;
-//     address.textContent = `address: ${item.address.street}, suite: ${item.address.suite}, city: ${item.address.city}`
-//     phone.textContent = item.phone;
-//     website.textContent = item.website;
-//     company.textContent = `name: ${item.company.name}, catchPhrase: ${item.company.catchPhrase}`
-//     tr.appendChild(id);
-//     tr.appendChild(name);
-//     tr.appendChild(username);
-//     tr.appendChild(email);
-//     tr.appendChild(address);
-//     tr.appendChild(phone);
-//     tr.appendChild(website);
-//     tr.appendChild(company);
-//     userData.appendChild(tr);
-// });
-
-// }
-
-// let bb = []
-// input.addEventListener("input", function(){
-//   arr.forEach(function(data){
-//     if(data.name.toLowerCase().includes(input.value.toLowerCase())){
-
-//       bb.push(data) // Ervin Howell
-
-//       for(let i = 0; i < arr.length; i ++ ){
-//         if(bb == arr[i].name){
-//           bb.push(arr[i])
-//         }
-//       }
-//     }
-//   })
-
-//   return bb
-
-// })
-
-// render(bb)
 
 let userData = document.querySelector(".userData");
 let input = document.querySelector(".inp");
 
-function render(data) {
-  // Create a new row for each user
-  data.forEach(function (item) {
-    let tr = document.createElement("tr");
-    let id = document.createElement("td");
-    let name = document.createElement("td");
-    let email = document.createElement("td");
-    let username = document.createElement("td");
-    let address = document.createElement("td");
-    let phone = document.createElement("td");
-    let website = document.createElement("td");
-    let company = document.createElement("td");
 
-    id.textContent = item.id;
-    name.textContent = item.name;
-    username.textContent = item.username;
-    email.textContent = item.email;
-    address.textContent = `address: ${item.address.street}, suite: ${item.address.suite}, city: ${item.address.city}`;
-    phone.textContent = item.phone;
-    website.textContent = item.website;
-    company.textContent = `name: ${item.company.name}, catchPhrase: ${item.company.catchPhrase}`;
-    tr.appendChild(id);
-    tr.appendChild(name);
-    tr.appendChild(username);
-    tr.appendChild(email);
-    tr.appendChild(address);
-    tr.appendChild(phone);
-    tr.appendChild(website);
-    tr.appendChild(company);
-    userData.appendChild(tr);
-  });
+function render(data) {
+    userData.innerHTML = "";
+
+    data.forEach(function (item) {
+        let tr = document.createElement("tr");
+        let id = document.createElement("td");
+        let name = document.createElement("td");
+        let email = document.createElement("td");
+        let username = document.createElement("td");
+        let address = document.createElement("td");
+        let phone = document.createElement("td");
+        let website = document.createElement("td");
+        let company = document.createElement("td");
+
+        id.textContent = item.id;
+        username.textContent = item.username;
+        name.textContent = item.name;
+        email.textContent = item.email;
+        address.textContent = `Address: ${item.address.street}, Suite: ${item.address.suite}, City: ${item.address.city}`;
+        phone.textContent = item.phone;
+        website.textContent = item.website;
+        company.textContent = `Company: ${item.company.name}, CatchPhrase: ${item.company.catchPhrase}`;
+
+        tr.appendChild(id);
+        tr.appendChild(name);
+        tr.appendChild(username);
+        tr.appendChild(email);
+        tr.appendChild(address);
+        tr.appendChild(phone);
+        tr.appendChild(website);
+        tr.appendChild(company);
+        userData.appendChild(tr);
+    });
 }
 
 input.addEventListener("input", function () {
-  let inputValue = input.value.toLowerCase();
+    let inputName = input.value.toLowerCase();
 
-  let bb = arr.filter(function (data) {
-    return (
-      data.id.toString().includes(inputValue) ||
-      data.name.toLowerCase().includes(inputValue) ||
-      data.username.toLowerCase().includes(inputValue) ||
-      data.email.toLowerCase().includes(inputValue) ||
-      data.phone.includes(inputValue) ||
-      data.website.toLowerCase().includes(inputValue)
-    );
-  });
+    let filteredData = arr.filter(function (data) {
+        return data.name.toLowerCase().includes(inputName);
+    });
 
-  // Clear the existing table content
-  userData.innerHTML = "";
-  render(bb);
+    render(filteredData);
 });
 
-// Initial render with the full array
 render(arr);
